@@ -21,4 +21,19 @@ class BooksController < ApplicationController
       erb :'books/new'
     end
 
+    get "/books/:id" do
+      redirect_if_not_logged_in 
+      @book = Book.find(params[:id])
+      erb :'books/show'
+    end
+  
+    post "/books/:id" do
+      redirect_if_not_logged_in 
+      @book = Book.find(params[:id])
+      unless Book.valid_params?(params)
+        redirect "/books/#{@book.id}/edit?error=invalid book"
+      end
+      @book.update(params.select{|i| i=="title" || i=="author" || i=="genre"})
+      redirect "/books/#{@book.id}"
+    end
 end
