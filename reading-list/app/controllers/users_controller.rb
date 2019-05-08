@@ -36,6 +36,18 @@ class UsersController < ApplicationController
           redirect to '/signup'
         end
       end
+
+      get '/users/:id' do
+        if !logged_in?
+          redirect '/books'
+        end
+        @user = User.find(params[:id])
+        if !@user.nil? && @user == current_user
+          erb :'users/show'
+        else
+          redirect '/books'
+        end
+      end
     
       get '/logout' do
         if session[:user_id] != nil
