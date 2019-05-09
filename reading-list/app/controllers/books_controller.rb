@@ -41,15 +41,12 @@ class BooksController < ApplicationController
       @book = Book.find_by(id: params[:id]) 
       erb :'books/show'
     end
+
+    patch '/books/:id' do
+      old_book = Book.find_by(id: params[:id]) 
+      old_book.update(params[:old_book])
   
-    post "/books/:id" do
-      # redirect_if_not_logged_in 
-      @book = Book.find_by(id: params[:id])
-      unless Book.valid_params?(params)
-        redirect "/books/#{@book.id}/edit?error=invalid book"
-      end
-      @book.update(params.select{|i| i=="title" || i=="author" || i=="genre"})
-      erb :"books/#{@book.id}"
+      redirect:"/books/show"
     end
 
     get "/books/:id/edit" do
@@ -58,18 +55,7 @@ class BooksController < ApplicationController
       @book = Book.find_by(id: params[:id])
       erb :'books/edit'
     end
-
-    patch '/books/:id' do
-      id = params[:id]
-      new_params = {}
-      old_book = Book.find(id) 
-      new_params[:title] = params["title"]
-      new_params[:author] = params["author"]
-      new_params[:genre] = params["genre"]
-      old_book.update(new_params)
-  
-      erb :"books/#{old_book.id}"
-    end
+ 
   
     delete '/books/:id/delete' do
       @book = Book.find_by(id: params[:id])
