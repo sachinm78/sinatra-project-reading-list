@@ -1,4 +1,6 @@
-<p> Here are your Books, <%= @user.username %>
+<h1>Current Reading List</h1>
+<br />
+<p> Here are your current books, <%= @user.username %>
 <% @user.books.each do |book| %>
   <ul>
     <li><a href="/books/<%=book.id%>"><%= book.title %></a></li>
