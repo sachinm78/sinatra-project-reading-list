@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         else
         @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
         session[:user_id] = @user.id
-        redirect '/books/new'
+        erb :'/books/new'
         end
     end
 
@@ -23,15 +23,15 @@ class UsersController < ApplicationController
         if !session[:user_id]
           erb :'users/login'
         else
-          redirect '/books/show'
+          erb :"books/show"
         end
       end
     
       post '/login' do
-        user = User.find_by(:username => params[:username])
-        if user && user.authenticate(params[:password])
-          session[:user_id] = user.id
-          erb :'/books/index'
+        @user = User.find_by(:username => params[:username])
+        if @user && @user.authenticate(params[:password])
+          session[:user_id] = @user.id
+          erb :'books/show'
         else
           redirect '/signup'
         end

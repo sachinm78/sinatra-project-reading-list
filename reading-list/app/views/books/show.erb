@@ -1,16 +1,19 @@
   <h1>Current Reading List</h1>
   <br />
-  <%= @book.title %><br />
-  <%= @book.author %> <br />
-  <%= @book.genre %><br />
-
+  
   <h2>Books</h2>
   <ul>
+  <% if @books != nil%>
   <% @books.each do |book| %>
     <li><a href="/books/<%=book.id%>"><%= book.title %></a></li>
+    <li><%=book.author%></li>
+    <li><%=book.genre%></li>
+    <br />
+  <a href="/books/<%=book.id%>/edit">Edit</a>
+  <br />
+  <a href="/books/<%=book.id%>/delete">Delete</a>
+  <br />
+  <% end%>
   <% end%>
   </ul>
-  <a href="/books/<%=@book.id%>/edit">Edit</a>
-  <br />
-  <a href="/books/<%=@book.id%>/delete">Delete</a>
-  <br />
+  
