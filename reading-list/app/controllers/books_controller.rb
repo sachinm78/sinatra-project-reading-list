@@ -24,9 +24,10 @@ class BooksController < ApplicationController
         unless Book.valid_params?(params)
           redirect "/books/new?error=invalid book"
         end
-        @book = Book.create(params)
-        @book.user_id = @current_user.id
-        erb :"books"
+        @book = Book.new(params)
+        @book.user_id = current_user.id
+        @book.save
+        redirect '/books/show'
     end
 
     get "/books/new" do

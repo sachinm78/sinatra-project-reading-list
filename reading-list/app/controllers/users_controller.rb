@@ -41,7 +41,7 @@ class UsersController < ApplicationController
         if !logged_in?
           redirect '/books'
         end
-        @user = User.find(params[:id])
+        @user = User.find_by(id: params[:id])
         if !@user.nil? && @user == current_user
           erb :'users/show'
         else

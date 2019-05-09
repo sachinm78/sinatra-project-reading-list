@@ -5,6 +5,7 @@
   <ul>
   <% if @books != nil%>
   <% @books.each do |book| %>
+    <br />
     <li><a href="/books/<%=book.id%>"><%= book.title %></a></li>
     <li><%=book.author%></li>
     <li><%=book.genre%></li>
