@@ -21,9 +21,6 @@ class BooksController < ApplicationController
   
     post "/books" do
         # redirect_if_not_logged_in 
-        unless Book.valid_params?(params)
-          redirect "/books/new?error=invalid book"
-        end
         @book = Book.new(params)
         @book.user_id = current_user.id
         @book.save
@@ -43,7 +40,7 @@ class BooksController < ApplicationController
 
     patch '/books/:id' do
       old_book = Book.find_by(id: params[:id]) 
-      old_book.update(params[:old_book])
+      old_book.update(params)
   
       redirect "/books/show"
     end

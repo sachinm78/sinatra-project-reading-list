@@ -1,22 +1,21 @@
   <h1>Current Reading List</h1>
-  <br />
-  
+    <br />
+    <li><a href="/books/index">Books Index</li></a>
+    <li><a href="/books/show">Your Reading List</li></a>
+    <li><a href="/books/new">Add A New Book</li></a>
+    <br />
+    <br />
   <h2>Books</h2>
-  <ul>
-  <% if @books != nil%>
-  <% @books.each do |book| %>
+    <% if @books != nil%>
+    <% @books.each do |book| %>
+      <br />
+      <li><%= book.title %></li>
+      <li><%=book.author%></li>
+      <li><%=book.genre%></li>
+    <a href="/books/<%=book.id%>/edit">Edit</a>
+    <a href="/books/<%=book.id%>/delete">Delete</a>
     <br />
-    <li><a href="/books/<%=book.id%>"><%= book.title %></a></li>
-    <li><%=book.author%></li>
-    <li><%=book.genre%></li>
-    <br />
-  <a href="/books/<%=book.id%>/edit">Edit</a>
-  <br />
-  <form action="/books/<%=book.id%>/delete" method="POST">
-  <input type="hidden" name="_method" value="delete" />
-  <input type="submit" value="DELETE"/>
-  </form>
-  <% end%>
-  <% end%>
-  </ul>
+    <% end%>
+    <% end%>
+
   
