@@ -40,8 +40,10 @@ class BooksController < ApplicationController
 
     patch '/books/:id' do
       old_book = Book.find_by(id: params[:id]) 
-      old_book.update(params)
-  
+      old_book[:title] = params[:title]
+      old_book[:author] = params[:author]
+      old_book[:genre] = params[:genre]
+      old_book.save
       redirect "/books/show"
     end
 
