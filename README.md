@@ -1,1 +1,1 @@
-# sinatra-project-reading-list
+# Sinatra Project: Reading List
