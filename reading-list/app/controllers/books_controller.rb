@@ -32,7 +32,6 @@ class BooksController < ApplicationController
 
     get "/books/new" do
       # redirect_if_not_logged_in 
-      @error_message = params[:error]
       erb :'books/new'
     end
 
@@ -46,20 +45,34 @@ class BooksController < ApplicationController
       old_book = Book.find_by(id: params[:id]) 
       old_book.update(params[:old_book])
   
-      redirect:"/books/show"
+      redirect "/books/show"
+    end
+
+    post '/books/:id' do
+      old_book = Book.find_by(id: params[:id]) 
+      old_book[:title] = params[:title]
+      old_book[:author] = params[:author]
+      old_book[:genre] = params[:genre]
+      old_book.save
+      redirect "/books/show"
     end
 
     get "/books/:id/edit" do
       # redirect_if_not_logged_in 
-      @error_message = params[:error]
       @book = Book.find_by(id: params[:id])
       erb :'books/edit'
     end
  
-  
     delete '/books/:id/delete' do
       @book = Book.find_by(id: params[:id])
       @book.destroy
-      erb :delete
+      erb :'books/show'
     end
+    
+    get "/books/:id/delete" do
+      # redirect_if_not_logged_in 
+      erb :'books/show'
+    end
+
+    
 end
