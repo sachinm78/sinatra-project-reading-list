@@ -13,7 +13,10 @@
       <li><%=book.author%></li>
       <li><%=book.genre%></li>
     <a href="/books/<%=book.id%>/edit">Edit</a>
-    <a href="/books/<%=book.id%>/delete">Delete</a>
+    <form action="/books/<%=book.id%>/delete" method="POST">
+    <input type="hidden" name="_method" value="delete" />
+    <input type="submit" value="DELETE"/>
+    </form>
     <br />
     <% end%>
     <% end%>

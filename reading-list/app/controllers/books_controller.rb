@@ -68,10 +68,4 @@ class BooksController < ApplicationController
       erb :'books/show'
     end
     
-    get "/books/:id/delete" do
-      # redirect_if_not_logged_in 
-      erb :'books/show'
-    end
-
-    
-end
+  end
